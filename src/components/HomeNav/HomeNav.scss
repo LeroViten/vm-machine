@@ -1,0 +1,25 @@
+@import '../../styles/shared.scss';
+
+.btnWrapper {
+  @include flexbox-center();
+}
+
+.addBtn {
+  margin-right: 15px;
+}
+
+.addBtn,
+.listBtn {
+  height: 40px;
+  width: 90px;
+  font-family: inherit;
+  border: 1px solid #00000025;
+  border-radius: 4px;
+  background-color: transparent;
+  transition: all $transition-duration $transition-function;
+
+  &:hover {
+    transform: scale(1.05);
+    border: 2px solid #00000025;
+  }
+}

@@ -1,24 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense, lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import Modal from './components/Modal';
+import Loader from './components/Loader';
 
+// lazy-load the rest pages:
+const CreatePage = lazy(() =>
+  import('./pages/CreatePage' /* webpackChunkName: "CreatePage" */)
+);
+const ListPage = lazy(() =>
+  import('./pages/ListPage' /* webpackChunkName: "ListPage" */)
+);
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage' /* webpackChunkName: "NotFoundPage" */)
+);
 class App extends Component {
-  state = {
-    showModal: false,
-  };
-
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
-
   render() {
-    const { showModal } = this.state;
     return (
       <div>
-        <HomePage toggleModal={this.toggleModal} />
-        {showModal && <Modal toggleModal={this.toggleModal} />}
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route index element={<HomePage />} />
+            <Route path="create" element={<CreatePage />} />
+            <Route path="list" element={<ListPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
       </div>
     );
   }

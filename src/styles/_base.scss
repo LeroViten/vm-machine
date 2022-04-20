@@ -1,5 +1,10 @@
 @import-normalize;
 
+@font-face {
+  font-family: 'OpenSans';
+  src: url('../fonts/OpenSans.ttf') format('truetype');
+}
+
 body {
-  font-family: $primary-font-stack;
+  font-family: OpenSans;
 }

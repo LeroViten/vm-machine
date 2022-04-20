@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './ListPage.scss';
 
-export default function ListPage() {
-  return <div>ListPage</div>;
+class ListPage extends Component {
+  render() {
+    return <div>ListPage</div>;
+  }
 }
+
+export default ListPage;

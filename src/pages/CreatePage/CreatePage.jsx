@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './CreatePage.scss';
 
-export default function CreatePage() {
-  return <div>CreatePage</div>;
+class CreatePage extends Component {
+  render() {
+    return <div>CreatePage</div>;
+  }
 }
+
+export default CreatePage;

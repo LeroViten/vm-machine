@@ -1,0 +1,40 @@
+@mixin box-shadow($h: 10px, $v: 10px, $b: 15px, $s: 0px, $c: #00000080) {
+  -webkit-box-shadow: $h $v $b $s $c;
+  -moz-box-shadow: $h $v $b $s $c;
+  box-shadow: $h $v $b $s $c;
+}
+// usage:
+// @include box-shadow(5px, 5px);
+
+@mixin pseudo($type: before, $cont: '', $pos: absolute) {
+  &::#{$type} {
+    content: $cont;
+    position: $pos;
+  }
+}
+// usage:
+// @include pseudo(after, '', relative);
+
+@mixin breakpoint($point) {
+  @if $point == mobile {
+    @media screen and (min-width: 320px) {
+      @content;
+    }
+  } @else if $point == tablet {
+    @media screen and (min-width: 768px) {
+      @content;
+    }
+  } @else if $point == desktop {
+    @media screen and (min-width: 1224px) {
+      @content;
+    }
+  } @else if $point == largeDesktop {
+    @media screen and (min-width: 1824px) {
+      @content;
+    }
+  }
+}
+// usage:
+// @include breakpoint(tablet) {
+//   background-color: cyan;
+// }

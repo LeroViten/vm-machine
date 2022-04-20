@@ -1,0 +1,19 @@
+$breakpoints: (
+  'phone': 320px,
+  // & 480px for landscape
+  'tablet': 768px,
+  // & 1024 px for landscape
+  'desktop': 1224px,
+  'wideDesktop': 1824px,
+) !default;
+
+$retinaDisplay: (
+  'retina2x': (
+    '(-webkit-min-device-pixel-ratio: 2)',
+    '(min-resolution: 192dpi)',
+  ),
+  'retina3x': (
+    '(-webkit-min-device-pixel-ratio: 3)',
+    '(min-resolution: 350dpi)',
+  ),
+) !default;

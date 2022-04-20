@@ -1,0 +1,15 @@
+%button {
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+%flexbox-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// use:
+// @extend %button || %flexbox-center

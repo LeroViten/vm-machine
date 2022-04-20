@@ -6,7 +6,7 @@ class HomePage extends Component {
   render() {
     return (
       <div className="wrapper">
-        <HomeNav />
+        <HomeNav toggleModal={this.props.toggleModal} />
       </div>
     );
   }

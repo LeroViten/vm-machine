@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './NotFoundPage.scss';
 
-export default function NotFoundPage() {
-  return <div>NotFoundPage</div>;
+class NotFoundPage extends Component {
+  render() {
+    return <div>NotFoundPage</div>;
+  }
 }
+
+export default NotFoundPage;

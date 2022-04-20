@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './HomeNav.scss';
 
 export default class HomeNav extends Component {
   render() {
     return (
       <div className="btnWrapper">
-        <button className="addBtn" type="button">
+        <NavLink to="/create" className="addBtn" type="button">
           Add VM
-        </button>
-        <button className="listBtn" type="button">
+        </NavLink>
+        <NavLink to="/list" className="listBtn" type="button">
           VM List
-        </button>
+        </NavLink>
       </div>
     );
   }

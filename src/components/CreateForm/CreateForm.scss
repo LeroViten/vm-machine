@@ -1,0 +1,126 @@
+@import '../../styles/shared.scss';
+
+.formWrapper {
+  @include flexbox-center();
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.createForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 300px;
+
+  & label {
+    margin-top: 8px;
+    margin-bottom: 3px;
+    align-self: flex-start;
+    font-family: inherit;
+  }
+
+  & input:invalid {
+    border: 1px solid #ef8798;
+    background-color: #ffdddd;
+  }
+
+  & input:valid {
+    border: 1px solid #87efbd;
+  }
+
+  & input,
+  & select {
+    border: 1px solid #777;
+    border-radius: 4px;
+    height: 30px;
+    transition: all 0.5s linear;
+    font-family: inherit;
+
+    &:focus {
+      border: 1px solid #4981d5;
+      outline: none;
+    }
+  }
+}
+
+.footBtnWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: -30%;
+  right: -70%;
+  margin-right: 50px;
+  margin-top: 15px;
+  padding-top: 30px;
+  font-family: inherit;
+}
+
+.backBtn,
+.nextBtn {
+  @include flexbox-center();
+  height: 30px;
+  width: 60px;
+  margin-top: 20px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: #80acff;
+  color: #fff;
+  font-family: inherit;
+  transition: all 300ms linear;
+
+  &:hover,
+  &:focus-visible {
+    background-color: #4278de;
+    transform: scale(1.04);
+    @include box-shadow(1px, 1px);
+  }
+}
+
+.nextBtn {
+  margin-left: 10px;
+}
+
+.statusWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 1px;
+  height: 315px;
+  margin: 0 25px;
+  background-color: #a2a2a2;
+}
+
+.status {
+  @include flexbox-center();
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #777;
+  border-radius: 50%;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+
+  &:nth-child(1) {
+    top: 0;
+    right: -8px;
+  }
+  &:nth-child(2) {
+    top: 10%;
+    right: -8px;
+  }
+  &:nth-child(3) {
+    top: 19%;
+    right: -8px;
+  }
+
+  &.valid {
+    font-size: 25px;
+  }
+}

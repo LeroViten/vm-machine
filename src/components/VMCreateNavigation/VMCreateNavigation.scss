@@ -1,12 +1,27 @@
 @import '../../styles/shared.scss';
 
+.createPageWrapper {
+  display: flex;
+  flex-direction: row;
+  font-family: inherit;
+  justify-content: center;
+  border-bottom: 1px solid #b3b3b3;
+}
+
 .navWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: left;
+  margin-top: 8px;
 
   & a {
     margin-bottom: 10px;
+    text-decoration: none;
+    color: inherit;
   }
+}
+
+a.active {
+  color: #6cc880;
 }

@@ -1,1 +1,6 @@
 @import '../../../styles/shared.scss';
+
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+}

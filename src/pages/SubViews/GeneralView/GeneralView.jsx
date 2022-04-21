@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import CreateForm from '../../../components/CreateForm';
 import './GeneralView.scss';
 
 export default class GeneralView extends Component {
   render() {
-    return <div>GeneralView</div>;
+    return (
+      <div className="infoContainer">
+        <CreateForm />
+      </div>
+    );
   }
 }

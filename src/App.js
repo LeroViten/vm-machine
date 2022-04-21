@@ -1,7 +1,9 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer, Zoom } from 'react-toastify';
 import HomePage from './pages/HomePage';
 import Loader from './components/Loader';
+import 'react-toastify/dist/ReactToastify.css';
 
 // lazy-load pages:
 const CreatePage = lazy(() =>
@@ -46,6 +48,7 @@ class App extends Component {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
+        <ToastContainer transition={Zoom} autoClose={3000} />
       </div>
     );
   }

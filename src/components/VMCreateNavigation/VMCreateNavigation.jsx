@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import GeneralView from '../../pages/SubViews/GeneralView';
 import './VMCreateNavigation.scss';
 
 // create a function to handle using route params in class component:
@@ -21,10 +22,18 @@ class VMCreateNavigation extends Component {
   render() {
     const pathname = this.state.location?.pathname;
     return (
-      <div className="navWrapper">
-        <NavLink to={`${pathname}/one`}>GeneralInfo</NavLink>
-        <NavLink to={`${pathname}/two`}>Destination</NavLink>
-        <NavLink to={`${pathname}/three`}>Summary</NavLink>
+      <div className="createPageWrapper">
+        <div className="navWrapper">
+          <NavLink to={`${pathname}/one`}>General Info</NavLink>
+          <NavLink to={`${pathname}/two`}>Destination</NavLink>
+          <NavLink to={`${pathname}/three`}>Summary</NavLink>
+        </div>
+        <div className="statusWrapper">
+          <div className="status">1</div>
+          <div className="status">2</div>
+          <div className="status">3</div>
+        </div>
+        <GeneralView />
       </div>
     );
   }

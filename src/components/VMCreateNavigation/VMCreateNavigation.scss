@@ -1,12 +1,58 @@
 @import '../../styles/shared.scss';
 
+.createPageWrapper {
+  display: flex;
+  flex-direction: row;
+  font-family: inherit;
+  justify-content: center;
+  border-bottom: 1px solid #b3b3b3;
+}
+
 .navWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: left;
+  margin-top: 8px;
 
   & a {
     margin-bottom: 10px;
+  }
+}
+
+.statusWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 1px;
+  height: 315px;
+  margin: 0 25px;
+  background-color: #a2a2a2;
+}
+
+.status {
+  @include flexbox-center();
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  border: 1px solid #777;
+  border-radius: 50%;
+  background-color: #fff;
+  font-family: inherit;
+  font-size: 10px;
+
+  &:nth-child(1) {
+    top: 0;
+    right: -8px;
+  }
+  &:nth-child(2) {
+    top: 10%;
+    right: -8px;
+  }
+  &:nth-child(3) {
+    top: 19%;
+    right: -8px;
   }
 }

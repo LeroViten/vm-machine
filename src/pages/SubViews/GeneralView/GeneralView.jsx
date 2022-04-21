@@ -5,7 +5,7 @@ import './GeneralView.scss';
 export default class GeneralView extends Component {
   render() {
     return (
-      <div>
+      <div className="infoContainer">
         <CreateForm />
       </div>
     );

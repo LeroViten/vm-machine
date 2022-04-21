@@ -28,11 +28,6 @@ class VMCreateNavigation extends Component {
           <NavLink to={`${pathname}/two`}>Destination</NavLink>
           <NavLink to={`${pathname}/three`}>Summary</NavLink>
         </div>
-        <div className="statusWrapper">
-          <div className="status">1</div>
-          <div className="status">2</div>
-          <div className="status">3</div>
-        </div>
         <GeneralView />
       </div>
     );

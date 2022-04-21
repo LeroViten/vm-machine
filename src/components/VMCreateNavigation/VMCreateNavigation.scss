@@ -1,0 +1,12 @@
+@import '../../styles/shared.scss';
+
+.navWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: left;
+
+  & a {
+    margin-bottom: 10px;
+  }
+}

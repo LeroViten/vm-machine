@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as vmActions from '../../redux/actions/vmActions';
 import * as globalActions from '../../redux/actions/globalActions';
@@ -16,6 +17,16 @@ const initialState = {
   name: '',
   isValid: false,
 };
+
+// create a function to handle using route params in class component:
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    return <Component {...props} location={location} navigate={navigate} />;
+  }
+  return ComponentWithRouter;
+}
 
 class CreateForm extends Component {
   state = initialState;
@@ -41,31 +52,19 @@ class CreateForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    if (this.props.isValid) {
+    if (this.props.isValid && this.state.ip !== '') {
       const data = this.state;
       this.props.addVM(data);
+      this.props.navigate('two');
     } else {
       toast.error('All fields are required');
       return;
     }
-
-    this.reset();
   };
-
-  handleValidation = () => {
-    this.setState((prevState) => ({
-      ...prevState,
-      isValid: !this.state.isValid,
-    }));
-    this.props.toggleValidation(this.state.isValid);
-  };
-
-  reset() {
-    this.setState(initialState);
-  }
 
   render() {
     const { isValid } = this.props;
+    const empty = this.state.ip === '';
     return (
       <>
         <div className="statusWrapper">
@@ -157,18 +156,14 @@ class CreateForm extends Component {
             />
           </form>
           <div className="footBtnWrapper">
-            <button
-              className="backBtn"
-              type="button"
-              onClick={this.handleValidation}
-            >
+            <button className="backBtn" type="button" disabled>
               Back
             </button>
             <button
               className="nextBtn"
               type="submit"
               onClick={this.handleSubmit}
-              disabled={!isValid}
+              disabled={!isValid && empty}
             >
               Next
             </button>
@@ -181,7 +176,7 @@ class CreateForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vms: state.vms,
+    vms: state.vms.collection,
     isValid: state.global.isValid,
   };
 };
@@ -193,4 +188,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateForm);
+const HOC = withRouter(CreateForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(HOC);

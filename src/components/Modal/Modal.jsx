@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
-import { NavLink } from 'react-router-dom';
 import { ReactComponent as CloseIcon } from '../../img/close.svg';
 import 'animate.css';
 import './Modal.scss';

@@ -29,7 +29,6 @@ class VMCreateNavigation extends Component {
   }
 
   render() {
-    const pathname = this.state.location?.pathname;
     return (
       <div className="createPageWrapper">
         <div className="navWrapper">
@@ -39,10 +38,9 @@ class VMCreateNavigation extends Component {
         </div>
         <Suspense fallback={<Loader />}>
           <Routes>
-            {/* <Route index element={<GeneralView />} /> */}
             <Route path="/" element={<GeneralView />} />
             <Route path="two" element={<DestinationView />} />
-            <Route path="three" element={<SummaryView />} />
+            <Route path="two/three" element={<SummaryView />} />
           </Routes>
         </Suspense>
       </div>

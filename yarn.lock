@@ -7561,7 +7561,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.8.1:
+prop-types@^15.5.8, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -7810,6 +7810,13 @@ react-toastify@^8.2.0:
   integrity sha512-Pg2Ju7NngAamarFvLwqrFomJ57u/Ay6i6zfLurt/qPynWkAkOthu6vxfqYpJCyNhHRhR4hu7+bySSeWWJu6PAg==
   dependencies:
     clsx "^1.1.1"
+
+react-treeview@^0.4.7:
+  version "0.4.7"
+  resolved "https://registry.yarnpkg.com/react-treeview/-/react-treeview-0.4.7.tgz#f647e04f70496eb11fb0912c35187e80eb60d458"
+  integrity sha1-9kfgT3BJbrEfsJEsNRh+gOtg1Fg=
+  dependencies:
+    prop-types "^15.5.8"
 
 react@^18.0.0:
   version "18.0.0"

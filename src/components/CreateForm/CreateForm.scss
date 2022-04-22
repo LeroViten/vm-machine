@@ -89,6 +89,13 @@
   }
 }
 
+.backBtn:disabled {
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #777;
+  }
+}
+
 .statusWrapper {
   position: relative;
   display: flex;

@@ -1,6 +1,15 @@
-import React, { Component } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import React, { Component, Suspense } from 'react';
+import {
+  NavLink,
+  useLocation,
+  useNavigate,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import GeneralView from '../../pages/SubViews/GeneralView';
+import DestinationView from '../../pages/SubViews/DestinationView';
+import SummaryView from '../../pages/SubViews/SummaryView';
+import Loader from '../Loader';
 import './VMCreateNavigation.scss';
 
 // create a function to handle using route params in class component:
@@ -24,11 +33,18 @@ class VMCreateNavigation extends Component {
     return (
       <div className="createPageWrapper">
         <div className="navWrapper">
-          <NavLink to={`${pathname}/one`}>General Info</NavLink>
-          <NavLink to={`${pathname}/two`}>Destination</NavLink>
-          <NavLink to={`${pathname}/three`}>Summary</NavLink>
+          <NavLink to="/">General Info</NavLink>
+          <NavLink to="two">Destination</NavLink>
+          <NavLink to="three">Summary</NavLink>
         </div>
-        <GeneralView />
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            {/* <Route index element={<GeneralView />} /> */}
+            <Route path="/" element={<GeneralView />} />
+            <Route path="two" element={<DestinationView />} />
+            <Route path="three" element={<SummaryView />} />
+          </Routes>
+        </Suspense>
       </div>
     );
   }

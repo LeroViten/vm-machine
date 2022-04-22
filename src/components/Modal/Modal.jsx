@@ -14,9 +14,13 @@ export default class Modal extends Component {
         <div className="Modal__content animate__animated animate__zoomIn">
           <div className="modalHeader">
             <p>Title</p>
-            <NavLink to="/" type="button" className="closeBtn">
+            <button
+              type="button"
+              className="closeBtn"
+              onClick={this.props.toggleModal}
+            >
               <CloseIcon />
-            </NavLink>
+            </button>
           </div>
           <hr />
           {this.props.children}

@@ -82,6 +82,11 @@
 
 .nextBtn {
   margin-left: 10px;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #777;
+  }
 }
 
 .statusWrapper {

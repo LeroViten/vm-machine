@@ -65,7 +65,7 @@ class DestinationView extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.pushToRepo(this.state.value);
-    this.props.navigate('three');
+    this.props.navigate('/three');
   };
 
   handleBackPress = () => {
@@ -73,7 +73,7 @@ class DestinationView extends Component {
   };
 
   render() {
-    const { isValid, isPlaced, navigate } = this.props;
+    const { isValid, isPlaced } = this.props;
     return (
       <>
         <div className="statusWrapper">

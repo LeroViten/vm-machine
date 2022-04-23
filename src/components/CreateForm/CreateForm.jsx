@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as vmActions from '../../redux/actions/vmActions';
 import * as globalActions from '../../redux/actions/globalActions';
+import EyeOnIcon from '../../img/eyeOn.svg';
+import EyeOffIcon from '../../img/eyeOff.svg';
 import './CreateForm.scss';
 
 const ipRegExp =
@@ -16,6 +18,7 @@ const initialState = {
   processor: 'celeron',
   name: '',
   isValid: false,
+  visible: false,
 };
 
 // create a function to handle using route params in class component:
@@ -49,6 +52,10 @@ class CreateForm extends Component {
     this.setState({ [name]: value });
   };
 
+  togglePassVisibility = () => {
+    this.setState((prev) => ({ ...prev, visible: !this.state.visible }));
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -64,6 +71,7 @@ class CreateForm extends Component {
 
   render() {
     const { isValid } = this.props;
+    const { visible } = this.state;
     const empty = this.state.ip === '';
     return (
       <>
@@ -112,7 +120,7 @@ class CreateForm extends Component {
             <label htmlFor="password">Password</label>
             <input
               name="password"
-              type="password"
+              type={visible ? 'text' : 'password'}
               id="password"
               value={this.state.password}
               onChange={this.handleInputChange}
@@ -122,6 +130,17 @@ class CreateForm extends Component {
               minLength={6}
               required
             />
+            <button
+              className="showPassBtn"
+              type="button"
+              onClick={this.togglePassVisibility}
+            >
+              {visible ? (
+                <img src={EyeOnIcon} alt="visible password icon" />
+              ) : (
+                <img src={EyeOffIcon} alt="invisible password icon" />
+              )}
+            </button>
             <label htmlFor="processor">Processor type</label>
             <select
               name="processor"

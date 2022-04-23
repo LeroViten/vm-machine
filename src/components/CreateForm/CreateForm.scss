@@ -44,6 +44,18 @@
   }
 }
 
+.showPassBtn {
+  @include flexbox-center();
+  position: fixed;
+  right: 25%;
+  top: 41%;
+  height: 30px;
+  width: 30px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
 .footBtnWrapper {
   display: flex;
   flex-direction: row;

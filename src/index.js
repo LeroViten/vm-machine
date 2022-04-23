@@ -6,8 +6,6 @@ import store from './redux/store.js';
 import App from './App';
 import './styles/shared.scss';
 
-console.log(store.getState());
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

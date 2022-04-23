@@ -134,7 +134,7 @@ class DestinationView extends Component {
               className="nextBtn"
               type="submit"
               onClick={this.handleSubmit}
-              disabled={!isPlaced}
+              disabled={!isValid}
             >
               Next
             </button>

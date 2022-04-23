@@ -40,7 +40,7 @@ class VMCreateNavigation extends Component {
           <Routes>
             <Route path="/" element={<GeneralView />} />
             <Route path="two" element={<DestinationView />} />
-            <Route path="two/three" element={<SummaryView />} />
+            <Route path="three" element={<SummaryView />} />
           </Routes>
         </Suspense>
       </div>

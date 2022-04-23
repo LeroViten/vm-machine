@@ -1,4 +1,4 @@
-import { ADD_VM, REMOVE_VM, PUSH_TO_REPO } from '../types';
+import { ADD_VM, REMOVE_VM, PUSH_TO_REPO, ACTIVATE_VM } from '../types';
 
 const initialState = {
   collection: [],
@@ -16,6 +16,12 @@ export const vmReducer = (state = initialState, action) => {
       return {
         collection: state.collection,
         repo: [...state.repo, action.payload],
+      };
+
+    case ACTIVATE_VM:
+      return {
+        collection: action.payload,
+        repo: state.repo,
       };
 
     case REMOVE_VM:

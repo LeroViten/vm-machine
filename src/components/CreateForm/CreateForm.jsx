@@ -17,6 +17,7 @@ const initialState = {
   password: '',
   processor: 'celeron',
   name: '',
+  isActive: false,
   isValid: false,
   visible: false,
 };

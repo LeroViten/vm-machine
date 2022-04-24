@@ -13,8 +13,8 @@ class Modal extends Component {
     const { isEditorOpen, openEditor, isListOpen, openList, toggleModal } =
       this.props;
     toggleModal();
-    openList(!isListOpen);
-    openEditor(!isEditorOpen);
+    openList(!isListOpen ? isListOpen : !isListOpen);
+    openEditor(!isEditorOpen ? isEditorOpen : !isEditorOpen);
   };
 
   render() {

@@ -1,7 +1,22 @@
-import { ADD_VM, REMOVE_VM, PUSH_TO_REPO, ACTIVATE_VM } from '../types';
+import {
+  ADD_VM,
+  REMOVE_VM,
+  PUSH_TO_REPO,
+  ACTIVATE_VM,
+  SELECT_VM,
+} from '../types';
 import shortid from 'shortid';
 
-export const addVM = ({ ip, login, password, processor, name, isActive }) => ({
+export const addVM = ({
+  ip,
+  login,
+  password,
+  processor,
+  name,
+  value,
+  isActive,
+  repo,
+}) => ({
   type: ADD_VM,
   payload: {
     id: shortid.generate(),
@@ -10,6 +25,8 @@ export const addVM = ({ ip, login, password, processor, name, isActive }) => ({
     password,
     name,
     processor,
+    value,
+    repo,
     isActive,
   },
 });
@@ -19,9 +36,14 @@ export const activateVm = (payload) => ({
   payload,
 });
 
-export const removeVM = (id) => ({
+export const selectVm = (payload) => ({
+  type: SELECT_VM,
+  payload,
+});
+
+export const removeVM = (payload) => ({
   type: REMOVE_VM,
-  payload: id,
+  payload: payload,
 });
 
 export const pushToRepo = (value) => ({

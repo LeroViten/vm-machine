@@ -5,6 +5,7 @@ import * as globalActions from './redux/actions/globalActions';
 import HomePage from './pages/HomePage';
 import Modal from './components/Modal';
 import VMCreateNavigation from './components/VMCreateNavigation';
+import ListPage from './pages/ListPage';
 import 'react-toastify/dist/ReactToastify.css';
 class App extends Component {
   toggleModal = () => {
@@ -21,6 +22,7 @@ class App extends Component {
         {isModalShown && (
           <Modal toggleModal={this.toggleModal}>
             {isEditorOpen && <VMCreateNavigation />}
+            {isListOpen && <ListPage />}
           </Modal>
         )}
         <ToastContainer transition={Zoom} autoClose={3000} />

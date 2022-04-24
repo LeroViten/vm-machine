@@ -1,0 +1,75 @@
+@import '../../styles/shared.scss';
+.vm-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+
+  & input[type='checkbox'] {
+    vertical-align: middle;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+th,
+td {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+  font-size: 24px;
+}
+
+th {
+  background-color: #75c9fa;
+}
+
+td {
+  background-color: #cdebfd;
+}
+
+.activationBtn {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 5px;
+  margin: 0 auto;
+  font-size: 18px;
+  @include flexbox-center();
+}
+
+.actionsWrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.deleteBtn {
+  border: 1px solid #777;
+  border-radius: 5px;
+  background-color: #cdebfd;
+  outline: none;
+  padding: 5px 10px;
+  margin-left: 16px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: normal;
+  transition: all 250ms linear;
+  @include flexbox-center();
+
+  &:hover,
+  &:focus-visible {
+    background-color: #75c9fa;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #a8a8a8;
+  }
+}

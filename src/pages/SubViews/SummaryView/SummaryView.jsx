@@ -39,12 +39,18 @@ class SummaryView extends Component {
       isValid,
       placeVM,
       isPlaced,
+      isEditorOpen,
+      openEditor,
+      isListOpen,
+      openList,
     } = this.props;
     toast.success('Virtual Machine added! 😎');
     navigate('/');
     toggleModal(!isModalShown);
     toggleValidation(!isValid);
     placeVM(!isPlaced);
+    openList(!isListOpen ? isListOpen : !isListOpen);
+    openEditor(!isEditorOpen ? isEditorOpen : !isEditorOpen);
   };
 
   handleBackPress = () => {
@@ -73,7 +79,7 @@ class SummaryView extends Component {
         <div className="summaryWrapper">
           <h5>Summary:</h5>
           <div className="summaryData">
-            {vms.map(({ ip, login, name, processor }, idx) => (
+            {vms.map(({ ip, login, name, processor, isActive }, idx) => (
               <div className="vmData" key={name}>
                 <div className="vmSummary">
                   <p>
@@ -131,6 +137,8 @@ const mapStateToProps = (state) => {
     isValid: state.global.isValid,
     isPlaced: state.global.isPlaced,
     isModalShown: state.global.isModalShown,
+    isEditorOpen: state.global.isEditorOpen,
+    isListOpen: state.global.isListOpen,
   };
 };
 
@@ -141,6 +149,8 @@ const mapDispatchToProps = (dispatch) => {
     toggleValidation: (value) =>
       dispatch(globalActions.toggleValidation(value)),
     placeVM: (value) => dispatch(globalActions.placeVM(value)),
+    openEditor: (value) => dispatch(globalActions.openEditor(value)),
+    openList: (value) => dispatch(globalActions.openList(value)),
   };
 };
 

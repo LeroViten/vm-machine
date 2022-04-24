@@ -24,12 +24,12 @@ const treeData = [
     children: [
       {
         label: 'first repo',
-        value: 'repo_one',
+        value: 'First Repo',
         key: '0-1',
       },
       {
         label: 'second repo',
-        value: 'repo_two',
+        value: 'Second Repo',
         key: '0-2',
       },
     ],
@@ -40,12 +40,12 @@ const treeData = [
     children: [
       {
         label: 'third repo',
-        value: 'repo_three',
+        value: 'Third Repo',
         key: '1-1',
       },
       {
         label: 'fourth repo',
-        value: 'repo_four',
+        value: 'Fourth Repo',
         key: '1-2',
       },
     ],
@@ -56,6 +56,7 @@ class DestinationView extends Component {
   state = {
     value: '',
   };
+
   handleChange = (e) => {
     const { checked, value } = e.target;
     this.props.placeVM(checked);
@@ -64,7 +65,16 @@ class DestinationView extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.pushToRepo(this.state.value);
+    const { vms, pushToRepo } = this.props;
+    const { value } = this.state;
+    let exactVm = vms.find((vm) => vm.repo === '');
+    exactVm = { ...exactVm, repo: value };
+    vms.forEach((item, i) => {
+      if (item.id === exactVm.id) {
+        vms[i] = exactVm;
+      }
+    });
+    pushToRepo(vms);
     this.props.navigate('/three');
   };
 
@@ -103,7 +113,7 @@ class DestinationView extends Component {
                     return (
                       <form
                         key={key}
-                        onSubmit={this.handleSubmit}
+                        onSubmit={(e) => this.handleSubmit(e)}
                         className="repoForm"
                       >
                         <label>
@@ -134,7 +144,7 @@ class DestinationView extends Component {
               className="nextBtn"
               type="submit"
               onClick={this.handleSubmit}
-              disabled={!isValid}
+              disabled={!isPlaced}
             >
               Next
             </button>
@@ -148,7 +158,6 @@ class DestinationView extends Component {
 const mapStateToProps = (state) => {
   return {
     vms: state.vms.collection,
-    repo: state.vms.repo,
     isValid: state.global.isValid,
     isPlaced: state.global.isPlaced,
   };

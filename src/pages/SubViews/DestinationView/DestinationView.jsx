@@ -6,6 +6,7 @@ import * as vmActions from '../../../redux/actions/vmActions';
 import * as globalActions from '../../../redux/actions/globalActions';
 import 'react-treeview/react-treeview.css';
 import './DestinationView.scss';
+import { toast } from 'react-toastify';
 
 // create a function to handle using route params in class component:
 function withRouter(Component) {
@@ -59,23 +60,38 @@ class DestinationView extends Component {
 
   handleChange = (e) => {
     const { checked, value } = e.target;
-    this.props.placeVM(checked);
-    this.setState({ value });
+    const { placeVM } = this.props;
+
+    if (this.state.value !== '') {
+      return;
+    } else {
+      placeVM(checked);
+      this.setState({ value });
+    }
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { vms, pushToRepo } = this.props;
     const { value } = this.state;
-    let exactVm = vms.find((vm) => vm.repo === '');
-    exactVm = { ...exactVm, repo: value };
-    vms.forEach((item, i) => {
-      if (item.id === exactVm.id) {
-        vms[i] = exactVm;
-      }
-    });
-    pushToRepo(vms);
-    this.props.navigate('/three');
+
+    const checkboxes = document.querySelectorAll(
+      "input[type='checkbox']:checked"
+    );
+    if (checkboxes.length > 1) {
+      toast.error('You can select only one Repo! 😢');
+      return;
+    } else {
+      let exactVm = vms.find((vm) => vm.repo === '');
+      exactVm = { ...exactVm, repo: value };
+      vms.forEach((item, i) => {
+        if (item.id === exactVm.id) {
+          vms[i] = exactVm;
+        }
+      });
+      pushToRepo(vms);
+      this.props.navigate('/three');
+    }
   };
 
   handleBackPress = () => {

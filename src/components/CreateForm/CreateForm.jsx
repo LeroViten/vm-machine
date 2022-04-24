@@ -37,6 +37,11 @@ function withRouter(Component) {
 class CreateForm extends Component {
   state = initialState;
 
+  componentDidMount() {
+    const tempData = JSON.parse(localStorage.getItem('temporaryVMData'));
+    this.setState(tempData ? tempData : initialState);
+  }
+
   componentDidUpdate() {
     if (
       this.state.ip.match(ipRegExp) &&
@@ -64,6 +69,7 @@ class CreateForm extends Component {
 
     if (this.props.isValid && this.state.ip !== '') {
       const data = this.state;
+      localStorage.setItem('temporaryVMData', JSON.stringify(data));
       this.props.addVM(data);
       this.props.navigate('two');
     } else {
@@ -94,7 +100,7 @@ class CreateForm extends Component {
             autoComplete="off"
             onSubmit={this.handleSubmit}
           >
-            <label htmlFor="ip">IP Address</label>
+            <label htmlFor="ip">IPv4 Address</label>
             <input
               name="ip"
               id="ip"

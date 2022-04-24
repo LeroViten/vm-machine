@@ -2,6 +2,7 @@
 
 .btnWrapper {
   @include flexbox-center();
+  font-family: inherit;
 }
 
 .addBtn {

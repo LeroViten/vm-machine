@@ -13,6 +13,7 @@ class Modal extends Component {
     const { isEditorOpen, openEditor, isListOpen, openList, toggleModal } =
       this.props;
     toggleModal();
+    localStorage.removeItem('temporaryVMData');
     openList(!isListOpen ? isListOpen : !isListOpen);
     openEditor(!isEditorOpen ? isEditorOpen : !isEditorOpen);
   };
@@ -48,7 +49,6 @@ class Modal extends Component {
 const mapStateToProps = (state) => {
   return {
     vms: state.vms.collection,
-    repo: state.vms.repo,
     isValid: state.global.isValid,
     isPlaced: state.global.isPlaced,
     isModalShown: state.global.isModalShown,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomeNav from '../../components/HomeNav';
 import './HomePage.scss';
 
-class HomePage extends Component {
+export default class HomePage extends Component {
   render() {
     return (
       <div className="wrapper">
@@ -11,5 +11,3 @@ class HomePage extends Component {
     );
   }
 }
-
-export default HomePage;

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './NotFoundPage.scss';
 
-class NotFoundPage extends Component {
+export default class NotFoundPage extends Component {
   render() {
-    return <div>NotFoundPage</div>;
+    return (
+      <div className="noPageWrapper">
+        The page doesn't exist. Use menu on the left!{' '}
+      </div>
+    );
   }
 }
-
-export default NotFoundPage;

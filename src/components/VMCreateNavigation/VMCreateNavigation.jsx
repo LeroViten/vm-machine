@@ -1,5 +1,6 @@
 import React, { Component, Suspense, lazy } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import GeneralView from '../../pages/SubViews/GeneralView';
 import Loader from '../Loader';
 import './VMCreateNavigation.scss';
@@ -20,19 +21,19 @@ const SummaryView = lazy(() =>
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage' /* webpackChunkName: "NotFoundPage" */)
 );
-export default class VMCreateNavigation extends Component {
-  state = {};
-  componentDidMount() {
-    this.setState(this.props);
-  }
-
+class VMCreateNavigation extends Component {
   render() {
+    const { isValid, isPlaced } = this.props;
     return (
       <div className="createPageWrapper">
         <div className="navWrapper">
           <NavLink to="/">General Info</NavLink>
-          <NavLink to="two">Destination</NavLink>
-          <NavLink to="three">Summary</NavLink>
+          <NavLink to="two" className={isValid ? 'valid' : 'invalid'}>
+            Destination
+          </NavLink>
+          <NavLink to="three" className={isPlaced ? 'valid' : 'invalid'}>
+            Summary
+          </NavLink>
         </div>
         <Suspense fallback={<Loader />}>
           <Routes>
@@ -46,3 +47,12 @@ export default class VMCreateNavigation extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isPlaced: state.global.isPlaced,
+    isValid: state.global.isValid,
+  };
+};
+
+export default connect(mapStateToProps)(VMCreateNavigation);

@@ -33,9 +33,6 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vms: state.vms.collection,
-    isValid: state.global.isValid,
-    isPlaced: state.global.isPlaced,
     isModalShown: state.global.isModalShown,
     isEditorOpen: state.global.isEditorOpen,
     isListOpen: state.global.isListOpen,

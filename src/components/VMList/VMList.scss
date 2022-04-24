@@ -4,11 +4,13 @@
   flex-direction: column;
   gap: 10px;
   padding: 1rem;
+  font-family: inherit;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
+  font-family: inherit;
 
   & input[type='checkbox'] {
     vertical-align: middle;
@@ -24,6 +26,7 @@ td {
   border: 1px solid #ffffff;
   text-align: left;
   padding: 8px;
+  font-family: inherit;
   font-size: 24px;
 }
 
@@ -48,6 +51,7 @@ td {
 .actionsWrapper {
   display: flex;
   justify-content: flex-start;
+  font-family: inherit;
 }
 
 .deleteBtn {

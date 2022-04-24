@@ -4,6 +4,7 @@
   @include flexbox-center();
   position: relative;
   margin-bottom: 30px;
+  font-family: inherit;
 }
 
 .createForm {
@@ -12,6 +13,7 @@
   justify-content: flex-start;
   flex-direction: column;
   width: 300px;
+  font-family: inherit;
 
   & label {
     margin-top: 8px;
@@ -112,6 +114,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  font-family: inherit;
   width: 1px;
   height: 315px;
   margin: 0 25px;

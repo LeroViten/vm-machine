@@ -14,11 +14,16 @@
   justify-content: flex-start;
   align-items: left;
   margin-top: 8px;
+  font-family: inherit;
 
   & a {
     margin-bottom: 10px;
     text-decoration: none;
     color: inherit;
+    font-family: inherit;
+
+    // * due to routing with NavLink I have to disable pointer-events:
+    pointer-events: none;
   }
 }
 
@@ -28,5 +33,4 @@ a.active {
 
 a.invalid {
   color: #a5a5a5;
-  pointer-events: none;
 }

@@ -136,7 +136,6 @@ class DestinationView extends Component {
                           <input
                             type={'checkbox'}
                             value={value}
-                            // disabled={isPlaced}
                             className="repoCheckbox"
                             onChange={this.handleChange}
                           />{' '}

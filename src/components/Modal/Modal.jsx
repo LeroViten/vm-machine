@@ -49,7 +49,6 @@ class Modal extends Component {
 const mapStateToProps = (state) => {
   return {
     vms: state.vms.collection,
-    repo: state.vms.repo,
     isValid: state.global.isValid,
     isPlaced: state.global.isPlaced,
     isModalShown: state.global.isModalShown,

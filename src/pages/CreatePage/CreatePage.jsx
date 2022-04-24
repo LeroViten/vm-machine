@@ -3,7 +3,7 @@ import Modal from '../../components/Modal';
 import VMCreateNavigation from '../../components/VMCreateNavigation';
 import './CreatePage.scss';
 
-class CreatePage extends Component {
+export default class CreatePage extends Component {
   render() {
     return (
       <>
@@ -14,5 +14,3 @@ class CreatePage extends Component {
     );
   }
 }
-
-export default CreatePage;

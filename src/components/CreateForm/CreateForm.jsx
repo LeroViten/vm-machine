@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import * as vmActions from '../../redux/actions/vmActions';
+import * as globalActions from '../../redux/actions/globalActions';
+import EyeOnIcon from '../../img/eyeOn.svg';
+import EyeOffIcon from '../../img/eyeOff.svg';
 import './CreateForm.scss';
 
 const ipRegExp =
@@ -11,46 +17,65 @@ const initialState = {
   password: '',
   processor: 'celeron',
   name: '',
+  repo: '',
+  value: false,
+  isActive: false,
   isValid: false,
+  visible: false,
 };
 
-export default class CreateForm extends Component {
+// create a function to handle using route params in class component:
+function withRouter(Component) {
+  function ComponentWithRouter(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    return <Component {...props} location={location} navigate={navigate} />;
+  }
+  return ComponentWithRouter;
+}
+
+class CreateForm extends Component {
   state = initialState;
+
+  componentDidUpdate() {
+    if (
+      this.state.ip.match(ipRegExp) &&
+      this.state.login.length > 3 &&
+      this.state.name.length > 3 &&
+      this.state.password.length > 5
+    ) {
+      this.props.toggleValidation(true);
+    } else {
+      this.props.toggleValidation(false);
+    }
+  }
 
   handleInputChange = (e) => {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
   };
 
+  togglePassVisibility = () => {
+    this.setState((prev) => ({ ...prev, visible: !this.state.visible }));
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      this.state.ip !== '' &&
-      this.state.login !== '' &&
-      this.state.name !== '' &&
-      this.state.password !== ''
-    ) {
-      this.setState((prevState) => ({ ...prevState, isValid: true }));
-    }
-
-    if (this.state.isValid) {
-      const data = this?.state;
-      console.log('data :>> ', data);
+    if (this.props.isValid && this.state.ip !== '') {
+      const data = this.state;
+      this.props.addVM(data);
+      this.props.navigate('two');
     } else {
       toast.error('All fields are required');
       return;
     }
-
-    this.reset();
   };
 
-  reset() {
-    this.setState(initialState);
-  }
-
   render() {
-    const { isValid } = this.state;
+    const { isValid } = this.props;
+    const { visible } = this.state;
+    const empty = this.state.ip === '';
     return (
       <>
         <div className="statusWrapper">
@@ -90,26 +115,35 @@ export default class CreateForm extends Component {
               value={this.state.login}
               onChange={this.handleInputChange}
               className="createForm__input"
-              placeholder="Min 4 and max 10 characters"
-              title="Minimum 4 and maximum 10 characters"
+              placeholder="Min 4 characters"
+              title="Minimum 4 characters"
               minLength={4}
-              maxLength={10}
               required
             />
             <label htmlFor="password">Password</label>
             <input
               name="password"
-              type="password"
+              type={visible ? 'text' : 'password'}
               id="password"
               value={this.state.password}
               onChange={this.handleInputChange}
               className="createForm__input"
-              placeholder="Min 6 and max 20 characters"
-              title="Minimum 6 and maximum 20 characters"
+              placeholder="Min 6 characters"
+              title="Minimum 6 characters"
               minLength={6}
-              maxLength={20}
               required
             />
+            <button
+              className="showPassBtn"
+              type="button"
+              onClick={this.togglePassVisibility}
+            >
+              {visible ? (
+                <img src={EyeOnIcon} alt="visible password icon" />
+              ) : (
+                <img src={EyeOffIcon} alt="invisible password icon" />
+              )}
+            </button>
             <label htmlFor="processor">Processor type</label>
             <select
               name="processor"
@@ -137,21 +171,21 @@ export default class CreateForm extends Component {
               value={this.state.name}
               onChange={this.handleInputChange}
               className="createForm__input"
-              placeholder="Min 4 and max 10 characters"
-              title="Minimum 4 and maximum 10 characters"
+              placeholder="Min 4 characters"
+              title="Minimum 4 characters"
               minLength={4}
-              maxLength={10}
               required
             />
           </form>
           <div className="footBtnWrapper">
-            <button className="backBtn" type="button">
+            <button className="backBtn" type="button" disabled>
               Back
             </button>
             <button
               className="nextBtn"
               type="submit"
               onClick={this.handleSubmit}
+              disabled={!isValid && empty}
             >
               Next
             </button>
@@ -161,3 +195,21 @@ export default class CreateForm extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    vms: state.vms.collection,
+    isValid: state.global.isValid,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addVM: (data) => dispatch(vmActions.addVM(data)),
+    toggleValidation: (value) =>
+      dispatch(globalActions.toggleValidation(value)),
+  };
+};
+
+const HOC = withRouter(CreateForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(HOC);

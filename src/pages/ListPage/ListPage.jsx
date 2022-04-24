@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Modal from '../../components/Modal';
+import VMList from '../../components/VMList';
+// import Modal from '../../components/Modal';
 import './ListPage.scss';
 
 class ListPage extends Component {
   render() {
     return (
       <>
-        <Modal />
+        <VMList />
       </>
     );
   }

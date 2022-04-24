@@ -1,0 +1,10 @@
+export const ADD_VM = 'vm/add';
+export const REMOVE_VM = 'vm/remove';
+export const PUSH_TO_REPO = 'vm/push';
+export const ACTIVATE_VM = 'vm/activate';
+export const TOGGLE_VALIDATION = 'validation/toggle';
+export const TOGGLE_MODAL = 'modal/toggle';
+export const PLACE_VM = 'vm/place';
+export const SELECT_VM = 'vm/select';
+export const OPEN_EDITOR = 'vm/editor';
+export const OPEN_LIST = 'vm/list';

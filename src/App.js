@@ -1,57 +1,51 @@
-import React, { Component, Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { Component } from 'react';
 import { ToastContainer, Zoom } from 'react-toastify';
+import { connect } from 'react-redux';
+import * as globalActions from './redux/actions/globalActions';
 import HomePage from './pages/HomePage';
-import Loader from './components/Loader';
+import Modal from './components/Modal';
+import VMCreateNavigation from './components/VMCreateNavigation';
+import ListPage from './pages/ListPage';
 import 'react-toastify/dist/ReactToastify.css';
-
-// lazy-load pages:
-const CreatePage = lazy(() =>
-  import('./pages/CreatePage' /* webpackChunkName: "CreatePage" */)
-);
-const ListPage = lazy(() =>
-  import('./pages/ListPage' /* webpackChunkName: "ListPage" */)
-);
-const NotFoundPage = lazy(() =>
-  import('./pages/NotFoundPage' /* webpackChunkName: "NotFoundPage" */)
-);
-
-// lazy-load subViews:
-const GeneralView = lazy(() =>
-  import(
-    './pages/SubViews/GeneralView' /* webpackChunkName: "general-subpage" */
-  )
-);
-const DestinationView = lazy(() =>
-  import(
-    './pages/SubViews/DestinationView' /* webpackChunkName: "destination-subpage" */
-  )
-);
-const SummaryView = lazy(() =>
-  import(
-    './pages/SubViews/SummaryView' /* webpackChunkName: "summary-subpage" */
-  )
-);
 class App extends Component {
+  toggleModal = () => {
+    const { isModalShown, toggleModal } = this.props;
+    toggleModal(!isModalShown);
+  };
+
   render() {
+    const { isModalShown, isEditorOpen, isListOpen } = this.props;
+
     return (
       <div>
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route index element={<HomePage />} />
-            <Route path="create" element={<CreatePage />}>
-              <Route path="one" element={<GeneralView />} />
-              <Route path="two" element={<DestinationView />} />
-              <Route path="three" element={<SummaryView />} />
-            </Route>
-            <Route path="list" element={<ListPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
+        <HomePage toggleModal={this.toggleModal} />
+        {isModalShown && (
+          <Modal toggleModal={this.toggleModal}>
+            {isEditorOpen && <VMCreateNavigation />}
+            {isListOpen && <ListPage />}
+          </Modal>
+        )}
         <ToastContainer transition={Zoom} autoClose={3000} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    vms: state.vms.collection,
+    repo: state.vms.repo,
+    isValid: state.global.isValid,
+    isPlaced: state.global.isPlaced,
+    isModalShown: state.global.isModalShown,
+    isEditorOpen: state.global.isEditorOpen,
+    isListOpen: state.global.isListOpen,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggleModal: (value) => dispatch(globalActions.toggleModal(value)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

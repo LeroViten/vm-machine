@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 import * as vmActions from '../../redux/actions/vmActions';
 import './VMList.scss';
 
 class VMList extends Component {
   state = {
+    isChecked: false,
     shouldComponentUpdate: false,
   };
 
@@ -19,6 +21,7 @@ class VMList extends Component {
     });
     activateVM(vms);
     this.setState({
+      isChecked: this.state.isChecked,
       shouldComponentUpdate: !this.state.shouldComponentUpdate,
     });
   };
@@ -34,27 +37,35 @@ class VMList extends Component {
     });
     selectVM(vms);
     this.setState({
+      isChecked: !this.state.isChecked,
       shouldComponentUpdate: !this.state.shouldComponentUpdate,
     });
   };
 
   handleDelete = () => {
     const { vms, removeVM } = this.props;
-    const filteredVms = vms.filter((vm) => vm.value !== true);
+    if (this.state.isChecked) {
+      const filteredVms = vms.filter((vm) => vm.value !== true);
 
-    removeVM(filteredVms);
+      removeVM(filteredVms);
+    } else {
+      toast.error('Choose a VM to delete! 🤷‍♂️');
+    }
     this.setState({
+      isChecked: this.state.isChecked,
       shouldComponentUpdate: !this.state.shouldComponentUpdate,
     });
   };
 
   handleSelectAll = () => {
-    const { vms } = this.props;
+    const { vms, selectVM } = this.props;
 
     vms.forEach((vm) => {
       vm.value = !vm.value;
     });
+    selectVM(vms);
     this.setState({
+      isChecked: !this.state.isChecked,
       shouldComponentUpdate: !this.state.shouldComponentUpdate,
     });
   };
@@ -122,6 +133,11 @@ class VMList extends Component {
             </tbody>
           </table>
         </div>
+        {!vms?.length && (
+          <h4 style={{ marginLeft: '18px', marginBottom: '10px' }}>
+            No VMs to display yet! Go create some first 😉
+          </h4>
+        )}
         <div className="actionsWrapper">
           <button
             className="deleteBtn"
@@ -140,7 +156,6 @@ class VMList extends Component {
 const mapStateToProps = (state) => {
   return {
     vms: state.vms.collection,
-    repo: state.vms.repo,
     isValid: state.global.isValid,
     isPlaced: state.global.isPlaced,
     isModalShown: state.global.isModalShown,

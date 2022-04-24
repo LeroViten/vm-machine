@@ -25,3 +25,8 @@
 a.active {
   color: #6cc880;
 }
+
+a.invalid {
+  color: #a5a5a5;
+  pointer-events: none;
+}

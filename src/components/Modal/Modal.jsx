@@ -13,6 +13,7 @@ class Modal extends Component {
     const { isEditorOpen, openEditor, isListOpen, openList, toggleModal } =
       this.props;
     toggleModal();
+    localStorage.removeItem('temporaryVMData');
     openList(!isListOpen ? isListOpen : !isListOpen);
     openEditor(!isEditorOpen ? isEditorOpen : !isEditorOpen);
   };
